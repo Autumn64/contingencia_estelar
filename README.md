@@ -1,2 +1,0 @@
-# contingencia_estelar
-wip
