@@ -21,7 +21,7 @@ func attack_event():
 		sprite.play("attacking_jumping")
 
 func onair_physics(delta: float) -> void:
-	acc = 0.5
+	acc = 1.3
 	velocity += get_gravity() * delta
 	
 	if attacking: return

@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://c5cxpsq6fts4k"]
 
 [ext_resource type="PackedScene" uid="uid://484gxmjuxn15" path="res://scenes/jugador.tscn" id="1_x4n2o"]
-[ext_resource type="Texture2D" uid="uid://cnkbp6plv3aa2" path="res://assets/sprites/tileset.png" id="2_uc3sl"]
+[ext_resource type="Texture2D" uid="uid://plvbs6sdcnf3" path="res://assets/sprites/tileset.png" id="2_uc3sl"]
 [ext_resource type="PackedScene" uid="uid://do46igvx0a2ue" path="res://scenes/moneda.tscn" id="3_2ka1k"]
 [ext_resource type="PackedScene" uid="uid://b4mdwsmxpneju" path="res://scenes/killzone.tscn" id="4_pew7j"]
-[ext_resource type="AudioStream" uid="uid://bm77aolavqeie" path="res://assets/bgm/into the void_square.ogg" id="5_iq6uk"]
+[ext_resource type="AudioStream" uid="uid://q0k73ntiw1sa" path="res://assets/bgm/into the void_square.ogg" id="5_iq6uk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2ka1k"]
 texture = ExtResource("2_uc3sl")
