@@ -1,0 +1,117 @@
+[gd_scene load_steps=15 format=3 uid="uid://484gxmjuxn15"]
+
+[ext_resource type="Texture2D" uid="uid://bn7pfrppeg7bj" path="res://assets/sprites/astronaut.png" id="1_g87hm"]
+[ext_resource type="Script" uid="uid://bm3ijkp4h3151" path="res://scripts/jugador.gd" id="1_lhlt4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lhlt4"]
+atlas = ExtResource("1_g87hm")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_28edd"]
+atlas = ExtResource("1_g87hm")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k64kw"]
+atlas = ExtResource("1_g87hm")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qimn5"]
+atlas = ExtResource("1_g87hm")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gynwn"]
+atlas = ExtResource("1_g87hm")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xm55e"]
+atlas = ExtResource("1_g87hm")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qimqe"]
+atlas = ExtResource("1_g87hm")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l5m57"]
+atlas = ExtResource("1_g87hm")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6lqtn"]
+atlas = ExtResource("1_g87hm")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_auomn"]
+atlas = ExtResource("1_g87hm")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k64kw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lhlt4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_28edd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k64kw")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qimn5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gynwn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xm55e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qimqe")
+}],
+"loop": false,
+"name": &"jumping",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l5m57")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6lqtn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_auomn")
+}],
+"loop": true,
+"name": &"running",
+"speed": 7.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qimn5"]
+radius = 6.0
+height = 28.0
+
+[node name="Jugador" type="CharacterBody2D"]
+z_index = 2
+collision_layer = 2
+script = ExtResource("1_lhlt4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -15)
+sprite_frames = SubResource("SpriteFrames_k64kw")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -14)
+shape = SubResource("CapsuleShape2D_qimn5")
+
+[node name="LifeTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="timeout" from="LifeTimer" to="." method="_on_life_timer_timeout"]
