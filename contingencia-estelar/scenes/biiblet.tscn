@@ -1,0 +1,149 @@
+[gd_scene load_steps=20 format=3 uid="uid://bfs3v107fbxuk"]
+
+[ext_resource type="Texture2D" uid="uid://8ncwhrblhetn" path="res://assets/sprites/Biiblet.png" id="1_3arj4"]
+[ext_resource type="Script" uid="uid://mbd2vrrs38at" path="res://scripts/biiblet.gd" id="1_n0vlh"]
+[ext_resource type="PackedScene" uid="uid://bkxxihh8m004o" path="res://scenes/damagezone.tscn" id="2_bg7op"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gwmvq"]
+radius = 4.0
+height = 28.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n0vlh"]
+atlas = ExtResource("1_3arj4")
+region = Rect2(0, 0, 64, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gwmvq"]
+atlas = ExtResource("1_3arj4")
+region = Rect2(64, 0, 64, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hb6rm"]
+atlas = ExtResource("1_3arj4")
+region = Rect2(128, 0, 64, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6fo31"]
+atlas = ExtResource("1_3arj4")
+region = Rect2(192, 0, 64, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lljxi"]
+atlas = ExtResource("1_3arj4")
+region = Rect2(256, 0, 64, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_36gg0"]
+atlas = ExtResource("1_3arj4")
+region = Rect2(320, 0, 64, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a0ud8"]
+atlas = ExtResource("1_3arj4")
+region = Rect2(384, 0, 64, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xc5at"]
+atlas = ExtResource("1_3arj4")
+region = Rect2(448, 0, 64, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bg7op"]
+atlas = ExtResource("1_3arj4")
+region = Rect2(0, 0, 64, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wiqlx"]
+atlas = ExtResource("1_3arj4")
+region = Rect2(128, 0, 64, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2npvp"]
+atlas = ExtResource("1_3arj4")
+region = Rect2(192, 0, 64, 62)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xc5at"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n0vlh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gwmvq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hb6rm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6fo31")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lljxi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_36gg0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a0ud8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xc5at")
+}],
+"loop": true,
+"name": &"attacking",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bg7op")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wiqlx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2npvp")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 3.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bg7op"]
+radius = 117.01709
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n0vlh"]
+radius = 9.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hb6rm"]
+radius = 11.0
+height = 36.0
+
+[node name="Biiblet" type="CharacterBody2D"]
+collision_layer = 4
+script = ExtResource("1_n0vlh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 1)
+shape = SubResource("CapsuleShape2D_gwmvq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_xc5at")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.31900054
+
+[node name="ChaseRadius" type="Area2D" parent="."]
+position = Vector2(-1, 0)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChaseRadius"]
+shape = SubResource("CircleShape2D_bg7op")
+
+[node name="DamageZone" parent="." instance=ExtResource("2_bg7op")]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageZone"]
+position = Vector2(0, 1)
+shape = SubResource("CapsuleShape2D_n0vlh")
+
+[node name="AttackZone" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackZone"]
+position = Vector2(0, 1)
+shape = SubResource("CapsuleShape2D_hb6rm")
+
+[connection signal="ready" from="." to="." method="_on_ready"]
+[connection signal="body_entered" from="ChaseRadius" to="." method="_on_chase_radius_body_entered"]
+[connection signal="body_exited" from="ChaseRadius" to="." method="_on_chase_radius_body_exited"]

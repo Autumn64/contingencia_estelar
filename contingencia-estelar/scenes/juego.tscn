@@ -1,10 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://c5cxpsq6fts4k"]
+[gd_scene load_steps=11 format=3 uid="uid://c5cxpsq6fts4k"]
 
 [ext_resource type="PackedScene" uid="uid://484gxmjuxn15" path="res://scenes/jugador.tscn" id="1_x4n2o"]
 [ext_resource type="Texture2D" uid="uid://plvbs6sdcnf3" path="res://assets/sprites/tileset.png" id="2_uc3sl"]
 [ext_resource type="PackedScene" uid="uid://do46igvx0a2ue" path="res://scenes/moneda.tscn" id="3_2ka1k"]
 [ext_resource type="PackedScene" uid="uid://b4mdwsmxpneju" path="res://scenes/killzone.tscn" id="4_pew7j"]
+[ext_resource type="PackedScene" uid="uid://bfs3v107fbxuk" path="res://scenes/biiblet.tscn" id="5_ervc2"]
 [ext_resource type="AudioStream" uid="uid://q0k73ntiw1sa" path="res://assets/bgm/into the void_square.ogg" id="5_iq6uk"]
+[ext_resource type="PackedScene" uid="uid://wh1nhdv2rcsu" path="res://scenes/akrita.tscn" id="7_ebtnq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2ka1k"]
 texture = ExtResource("2_uc3sl")
@@ -2629,3 +2631,26 @@ position = Vector2(410, 55)
 
 [node name="Moneda8" parent="Monedas" instance=ExtResource("3_2ka1k")]
 position = Vector2(412, 70)
+
+[node name="Biiblets" type="Node" parent="."]
+
+[node name="Biiblet" parent="Biiblets" instance=ExtResource("5_ervc2")]
+position = Vector2(-45, -4)
+collision_mask = 3
+
+[node name="Biiblet2" parent="Biiblets" instance=ExtResource("5_ervc2")]
+position = Vector2(589, -28)
+collision_mask = 3
+
+[node name="Biiblet3" parent="Biiblets" instance=ExtResource("5_ervc2")]
+position = Vector2(890, 44)
+collision_mask = 3
+
+[node name="Biiblet4" parent="Biiblets" instance=ExtResource("5_ervc2")]
+position = Vector2(1146, 35)
+collision_mask = 3
+
+[node name="Akritas" type="Node" parent="."]
+
+[node name="Akrita" parent="Akritas" instance=ExtResource("7_ebtnq")]
+position = Vector2(481, -6)

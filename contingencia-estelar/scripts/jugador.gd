@@ -1,6 +1,8 @@
 extends CharacterBody2D
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var attack_shape: Area2D = $AttackShape
 
 const SPEED = 100.0
 const JUMP_VELOCITY = -130.0
@@ -10,6 +12,7 @@ var sliding = false
 var attacking = false
 
 func life_events():
+	print(life)
 	if life <= 0:
 		get_tree().reload_current_scene()
 
@@ -19,6 +22,9 @@ func attack_event():
 		sprite.play("attacking_running" if velocity.x != 0 else "attacking_idle")
 	else:
 		sprite.play("attacking_jumping")
+
+func apply_knockback(force: Vector2) -> void:
+	velocity = force
 
 func onair_physics(delta: float) -> void:
 	acc = 1.3
@@ -61,13 +67,14 @@ func _physics_process(delta: float) -> void:
 		onfloor_physics()
 		
 	if Input.is_action_just_pressed("attack"):
+		animation_player.play("attack")
 		attack_event()
-		
 		
 	# Get the input direction and handle the movement/deceleration.
 	var direction := Input.get_axis("move_left", "move_right")
 	if direction:
 		sprite.flip_h = (direction < 0)
+		attack_shape.scale.x = -1 if (direction < 0) else 1
 		velocity.x = move_toward(velocity.x, direction * SPEED, SPEED * acc * delta)
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED * acc * delta)
@@ -76,10 +83,22 @@ func _physics_process(delta: float) -> void:
 
 func _on_life_timer_timeout() -> void:
 	life += -10
-	print(life)
 	life_events()
-	
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if "attacking" in sprite.animation:
+		animation_player.play("RESET")
 		attacking = false
+
+func _on_attack_shape_area_entered(area: Area2D) -> void:
+	var enemy = area.get_parent()
+	var damagezone = enemy.get_node("./DamageZone")
+	var direction: Vector2 = (global_position - enemy.global_position).normalized()
+		
+	enemy.life -= enemy.damage_factor
+	enemy.life_events()
+	
+	enemy.knockback = true
+	enemy.apply_knockback(direction * -80)
+	
+	damagezone.start_timer()
