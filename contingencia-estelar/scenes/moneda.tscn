@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=3 uid="uid://do46igvx0a2ue"]
 
 [ext_resource type="Script" uid="uid://cex4oiut6oiv8" path="res://scripts/moneda.gd" id="1_r2l3b"]
-[ext_resource type="Texture2D" uid="uid://cmoi0vxj88ht1" path="res://assets/sprites/Bubble.png" id="2_lqt2j"]
-[ext_resource type="AudioStream" uid="uid://7ppemdctqs48" path="res://assets/sfx/coin.wav" id="3_lqt2j"]
+[ext_resource type="Texture2D" uid="uid://3tud4obobk00" path="res://assets/sprites/Bubble.png" id="2_lqt2j"]
+[ext_resource type="AudioStream" uid="uid://tu1li6ws4lxt" path="res://assets/sfx/coin.ogg" id="3_lqt2j"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lqt2j"]
 atlas = ExtResource("2_lqt2j")
@@ -15,19 +15,19 @@ region = Rect2(16, 0, 16, 16)
 [sub_resource type="SpriteFrames" id="SpriteFrames_k2ql3"]
 animations = [{
 "frames": [{
-"duration": 7.0,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_lqt2j")
 }, {
-"duration": 7.0,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_lrxkp")
 }],
 "loop": true,
 "name": &"default",
-"speed": 10.0
+"speed": 2.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_63l7i"]
-radius = 5.0990195
+radius = 3.0
 
 [sub_resource type="Animation" id="Animation_lrxkp"]
 length = 0.001
@@ -128,13 +128,13 @@ _data = {
 }
 
 [node name="Moneda" type="Area2D"]
-collision_mask = 2
+collision_mask = 32
 script = ExtResource("1_r2l3b")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_k2ql3")
 autoplay = "default"
-frame_progress = 0.41865343
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_63l7i")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://484gxmjuxn15"]
+[gd_scene load_steps=59 format=3 uid="uid://484gxmjuxn15"]
 
 [ext_resource type="Script" uid="uid://bm3ijkp4h3151" path="res://scripts/jugador.gd" id="1_lhlt4"]
 [ext_resource type="Texture2D" uid="uid://c6p4monn0rc8i" path="res://assets/sprites/astronaut/AST_idle_SHEET.png" id="2_28edd"]
@@ -7,6 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://bicpr5htqr6qn" path="res://assets/sprites/astronaut/attacking/AST_jump_attacking_SHEET.png" id="3_qimqe"]
 [ext_resource type="Texture2D" uid="uid://ckmc1ul6h2dkm" path="res://assets/sprites/astronaut/attacking/AST_running_attacking_SHEET.png" id="3_xm55e"]
 [ext_resource type="Texture2D" uid="uid://btykiog52ls07" path="res://assets/sprites/astronaut/AST_running_SHEET.png" id="4_k64kw"]
+[ext_resource type="AudioStream" uid="uid://c8ag2gtsdbxub" path="res://assets/sfx/jump.ogg" id="8_l5m57"]
+[ext_resource type="AudioStream" uid="uid://cf6o3x5sci02y" path="res://assets/sfx/dash.ogg" id="9_6lqtn"]
+[ext_resource type="AudioStream" uid="uid://du2vi70kmc0pe" path="res://assets/sfx/attack.ogg" id="10_6lqtn"]
+[ext_resource type="AudioStream" uid="uid://bathjpwvp8cw4" path="res://assets/sfx/attack_player.ogg" id="11_auomn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_73qt7"]
 atlas = ExtResource("2_gynwn")
@@ -304,8 +308,63 @@ animations = [{
 radius = 6.0
 height = 32.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xm55e"]
+radius = 6.0
+height = 32.0
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xm55e"]
-size = Vector2(13, 14)
+size = Vector2(10, 14)
+
+[sub_resource type="Animation" id="Animation_l5m57"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AttackShape/CollisionShape2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AttackShape/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_qimqe"]
 resource_name = "attack"
@@ -335,24 +394,58 @@ tracks/1/keys = {
 "values": [false, true]
 }
 
-[sub_resource type="Animation" id="Animation_l5m57"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6lqtn"]
+_data = {
+&"RESET": SubResource("Animation_l5m57"),
+&"attack": SubResource("Animation_qimqe")
+}
+
+[sub_resource type="Animation" id="Animation_6lqtn"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AttackShape/CollisionShape2D:visible")
+tracks/0/path = NodePath(".:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AttackShape/CollisionShape2D:disabled")
+tracks/1/path = NodePath("DamageArea/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_xm55e"]
+resource_name = "damaged"
+length = 1.45
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.033333335, 0.083333336, 0.13333334, 0.18333334, 0.23333333, 0.28333333, 0.33333334, 0.38333333, 0.43333334, 0.48333332, 0.53333336, 0.5833334, 0.6333334, 0.68333334, 0.73333335, 0.78333336, 0.8333334, 0.8833334, 0.93333334, 0.98333335, 1.0333333, 1.0833333, 1.1333333, 1.1833333, 1.2333333, 1.2833333, 1.3333333, 1.3833333, 1.4333333, 1.4833333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, true, false, true, false, true, false, true, false, true, false, true, false, true, false, true, false, true, false, true, false, true, false, true, false, true, false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DamageArea/CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -362,15 +455,15 @@ tracks/1/keys = {
 "values": [true]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_6lqtn"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_auomn"]
 _data = {
-&"RESET": SubResource("Animation_l5m57"),
-&"attack": SubResource("Animation_qimqe")
+&"RESET": SubResource("Animation_6lqtn"),
+&"damaged": SubResource("Animation_xm55e")
 }
 
 [node name="Jugador" type="CharacterBody2D"]
 z_index = 2
-collision_layer = 2
+collision_layer = 32
 script = ExtResource("1_lhlt4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -378,8 +471,6 @@ position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_k64kw")
 animation = &"attacking_jumping"
 autoplay = "idle"
-frame = 3
-frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -16)
@@ -389,13 +480,27 @@ shape = SubResource("CapsuleShape2D_qimn5")
 wait_time = 5.0
 autostart = true
 
+[node name="DamageArea" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
+position = Vector2(0, -16)
+shape = SubResource("CapsuleShape2D_xm55e")
+
+[node name="FollowArea" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FollowArea"]
+position = Vector2(0, -16)
+shape = SubResource("CapsuleShape2D_xm55e")
+
 [node name="AttackShape" type="Area2D" parent="."]
 position = Vector2(-1, 1)
-collision_mask = 4
+collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackShape"]
 visible = false
-position = Vector2(7.5, -16)
+position = Vector2(6, -16)
 shape = SubResource("RectangleShape2D_xm55e")
 disabled = true
 
@@ -405,6 +510,27 @@ libraries = {
 }
 autoplay = "RESET"
 
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_auomn")
+}
+
+[node name="JumpAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_l5m57")
+volume_db = 2.0
+
+[node name="SlideAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_6lqtn")
+volume_db = 2.0
+
+[node name="AttackAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_6lqtn")
+
+[node name="DamageAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_auomn")
+volume_db = 4.0
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="timeout" from="LifeTimer" to="." method="_on_life_timer_timeout"]
 [connection signal="area_entered" from="AttackShape" to="." method="_on_attack_shape_area_entered"]
+[connection signal="animation_finished" from="AnimationPlayer2" to="." method="_on_animation_player_2_animation_finished"]

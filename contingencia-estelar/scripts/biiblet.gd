@@ -1,8 +1,9 @@
 extends CharacterBody2D
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var attacked_animation: AnimationPlayer = $AttackedAnimation
 
-var run_speed = 25
+var run_speed = 70
 var player = null
 var knockback = false
 var life = 100
@@ -15,7 +16,10 @@ var wander_range_y := 20
 var wander_speed := 15 
 
 func life_events():
-	if life <= 0: queue_free()
+	if life <= 0: 
+		attacked_animation.play("attacked_die")
+		return
+	attacked_animation.play("attacked")
 
 func wander():
 	if position.distance_to(wander_target) < 5:
@@ -50,11 +54,12 @@ func _physics_process(_delta):
 		sprite.rotation = velocity.angle() + (PI/2) + 0.1
 	move_and_slide()
 
-func _on_chase_radius_body_entered(body: Node2D) -> void:
-	player = body
+func _on_chase_radius_area_entered(area: Area2D) -> void:
+	player = area.get_parent()
 	sprite.play("attacking")
 
-func _on_chase_radius_body_exited(_body: Node2D) -> void:
+
+func _on_chase_radius_area_exited(_area: Area2D) -> void:
 	player = null
 	sprite.play("idle")
 	set_wander_target()

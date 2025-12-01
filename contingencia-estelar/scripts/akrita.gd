@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var attacked_animation: AnimationPlayer = $AttackedAnimation
 
 var run_speed = 40
 var player = null
@@ -11,11 +12,14 @@ var damage_factor = 40
 # Si no detecta al jugador se moverá aleatoriamente
 var wander_target: Vector2
 var wander_range_x := 50
-var wander_range_y := 20
-var wander_speed := 15 
+var wander_range_y := 10
+var wander_speed := 10 
 
 func life_events():
-	if life <= 0: queue_free()
+	if life <= 0: 
+		attacked_animation.play("attacked_die")
+		return
+	attacked_animation.play("attacked")
 
 func wander():
 	if position.distance_to(wander_target) < 5:
@@ -52,11 +56,19 @@ func _physics_process(_delta):
 		sprite.rotation = velocity.angle()
 	move_and_slide()
 
-func _on_chase_radius_body_entered(body: Node2D) -> void:
-	player = body
-	sprite.play("attacking")
+func _on_chase_radius_area_entered(area: Area2D) -> void:
+	player = area.get_parent()
+	sprite.play("attack_begin")
 
-func _on_chase_radius_body_exited(_body: Node2D) -> void:
+func _on_chase_radius_area_exited(_area: Area2D) -> void:
 	player = null
-	sprite.play("idle")
-	set_wander_target()
+	sprite.play("attack_finish")
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	if sprite.animation == "attack_begin":
+		sprite.play("attacking")
+		run_speed = 95
+	
+	if sprite.animation == "attack_finish":
+		sprite.play("idle")
+		run_speed = 40

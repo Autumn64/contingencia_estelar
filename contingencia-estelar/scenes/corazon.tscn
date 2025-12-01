@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://b7ghl6cykfyfs"]
+
+[ext_resource type="Texture2D" uid="uid://bur52yicrhku0" path="res://assets/sprites/hearts.png" id="1_nrsr5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nrsr5"]
+atlas = ExtResource("1_nrsr5")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5vldm"]
+atlas = ExtResource("1_nrsr5")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vvx6w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nrsr5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5vldm")
+}],
+"loop": true,
+"name": &"disabled",
+"speed": 1.0
+}]
+
+[node name="Corazón" type="AnimatedSprite2D"]
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_vvx6w")
+autoplay = "default"

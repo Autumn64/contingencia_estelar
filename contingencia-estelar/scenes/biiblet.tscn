@@ -1,8 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://bfs3v107fbxuk"]
+[gd_scene load_steps=25 format=3 uid="uid://bfs3v107fbxuk"]
 
 [ext_resource type="Texture2D" uid="uid://8ncwhrblhetn" path="res://assets/sprites/Biiblet.png" id="1_3arj4"]
 [ext_resource type="Script" uid="uid://mbd2vrrs38at" path="res://scripts/biiblet.gd" id="1_n0vlh"]
 [ext_resource type="PackedScene" uid="uid://bkxxihh8m004o" path="res://scenes/damagezone.tscn" id="2_bg7op"]
+[ext_resource type="AudioStream" uid="uid://b7msn0agj5o0n" path="res://assets/sfx/attack_enemy.ogg" id="4_gwmvq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gwmvq"]
 radius = 4.0
@@ -99,17 +100,134 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bg7op"]
-radius = 117.01709
+radius = 154.01299
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n0vlh"]
-radius = 9.0
+radius = 12.0
+height = 54.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hb6rm"]
-radius = 11.0
-height = 36.0
+radius = 17.0
+height = 56.0
+
+[sub_resource type="Animation" id="Animation_gwmvq"]
+resource_name = "attacked"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AttackedAudio:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_hb6rm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AttackedAudio:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DamageZone/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_6fo31"]
+resource_name = "attacked_die"
+length = 0.45
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AttackedAudio:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.43333334),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DamageZone/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.16666667),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AnimatedSprite2D:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.16666667),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6fo31"]
+_data = {
+&"RESET": SubResource("Animation_hb6rm"),
+&"attacked": SubResource("Animation_gwmvq"),
+&"attacked_die": SubResource("Animation_6fo31")
+}
 
 [node name="Biiblet" type="CharacterBody2D"]
-collision_layer = 4
+collision_layer = 8
 script = ExtResource("1_n0vlh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -117,7 +235,6 @@ position = Vector2(1, 1)
 shape = SubResource("CapsuleShape2D_gwmvq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_xc5at")
 animation = &"idle"
 autoplay = "idle"
@@ -125,25 +242,37 @@ frame_progress = 0.31900054
 
 [node name="ChaseRadius" type="Area2D" parent="."]
 position = Vector2(-1, 0)
-collision_mask = 2
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ChaseRadius"]
 shape = SubResource("CircleShape2D_bg7op")
 
 [node name="DamageZone" parent="." instance=ExtResource("2_bg7op")]
+rotation = 1.5707964
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageZone"]
-position = Vector2(0, 1)
+position = Vector2(-1, 2)
 shape = SubResource("CapsuleShape2D_n0vlh")
 
 [node name="AttackZone" type="Area2D" parent="."]
-collision_layer = 4
+rotation = 1.5707964
+collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackZone"]
-position = Vector2(0, 1)
+position = Vector2(-0.99999994, 2)
 shape = SubResource("CapsuleShape2D_hb6rm")
 
+[node name="AttackedAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_gwmvq")
+volume_db = 3.0
+
+[node name="AttackedAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_6fo31")
+}
+autoplay = "RESET"
+
 [connection signal="ready" from="." to="." method="_on_ready"]
-[connection signal="body_entered" from="ChaseRadius" to="." method="_on_chase_radius_body_entered"]
-[connection signal="body_exited" from="ChaseRadius" to="." method="_on_chase_radius_body_exited"]
+[connection signal="area_entered" from="ChaseRadius" to="." method="_on_chase_radius_area_entered"]
+[connection signal="area_exited" from="ChaseRadius" to="." method="_on_chase_radius_area_exited"]

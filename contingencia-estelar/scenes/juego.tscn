@@ -1,6 +1,6 @@
-[gd_scene load_steps=22 format=3 uid="uid://c5cxpsq6fts4k"]
+[gd_scene load_steps=25 format=3 uid="uid://c5cxpsq6fts4k"]
 
-[ext_resource type="Texture2D" uid="uid://b533v010b8i0s" path="res://assets/sprites/Tilemap.png" id="1_5g1u2"]
+[ext_resource type="Texture2D" uid="uid://dvigxv6yibh1k" path="res://assets/sprites/Tilemap.png" id="1_5g1u2"]
 [ext_resource type="PackedScene" uid="uid://484gxmjuxn15" path="res://scenes/jugador.tscn" id="1_x4n2o"]
 [ext_resource type="Texture2D" uid="uid://plvbs6sdcnf3" path="res://assets/sprites/tileset.png" id="2_uc3sl"]
 [ext_resource type="PackedScene" uid="uid://do46igvx0a2ue" path="res://scenes/moneda.tscn" id="3_2ka1k"]
@@ -8,6 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://bfs3v107fbxuk" path="res://scenes/biiblet.tscn" id="5_ervc2"]
 [ext_resource type="AudioStream" uid="uid://q0k73ntiw1sa" path="res://assets/bgm/into the void_square.ogg" id="5_iq6uk"]
 [ext_resource type="PackedScene" uid="uid://wh1nhdv2rcsu" path="res://scenes/akrita.tscn" id="7_ebtnq"]
+[ext_resource type="Script" uid="uid://xa2dy4lbblc1" path="res://scripts/hud.gd" id="9_bpkdb"]
+[ext_resource type="PackedScene" uid="uid://bwrkgqfe8bif4" path="res://scenes/burbuja.tscn" id="9_mlgrx"]
+[ext_resource type="PackedScene" uid="uid://b7ghl6cykfyfs" path="res://scenes/corazon.tscn" id="11_ae6e5"]
 
 [sub_resource type="Gradient" id="Gradient_5g1u2"]
 offsets = PackedFloat32Array(0, 0.34, 1)
@@ -2918,6 +2921,7 @@ offset_top = -401.0
 offset_right = 3357.0
 offset_bottom = 175.0
 texture = SubResource("GradientTexture2D_mlgrx")
+metadata/_edit_use_anchors_ = true
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(1, -1)
@@ -2933,7 +2937,7 @@ position = Vector2(46, 51)
 
 [node name="Camera2D" type="Camera2D" parent="Jugador"]
 position = Vector2(0, -11)
-zoom = Vector2(4, 4)
+zoom = Vector2(3.5, 3.5)
 limit_left = -90
 limit_bottom = 130
 position_smoothing_enabled = true
@@ -2944,7 +2948,8 @@ stream = ExtResource("5_iq6uk")
 autoplay = true
 
 [node name="Killzone" parent="." instance=ExtResource("4_pew7j")]
-position = Vector2(352, 137)
+position = Vector2(353, 137)
+collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
 position = Vector2(-25, 12)
@@ -2953,7 +2958,7 @@ shape = SubResource("WorldBoundaryShape2D_iq6uk")
 [node name="Biiblets" type="Node" parent="."]
 
 [node name="Biiblet" parent="Biiblets" instance=ExtResource("5_ervc2")]
-position = Vector2(497, 44)
+position = Vector2(612, -20)
 collision_mask = 3
 
 [node name="Biiblet3" parent="Biiblets" instance=ExtResource("5_ervc2")]
@@ -2961,69 +2966,81 @@ position = Vector2(1534, 38)
 collision_mask = 3
 
 [node name="Biiblet4" parent="Biiblets" instance=ExtResource("5_ervc2")]
-position = Vector2(920, 47)
+position = Vector2(1049, -10)
 collision_mask = 3
+
+[node name="Biiblet2" parent="Biiblets" instance=ExtResource("5_ervc2")]
+position = Vector2(264, -73)
 
 [node name="Monedas" type="Node2D" parent="."]
 
 [node name="Moneda" parent="Monedas" instance=ExtResource("3_2ka1k")]
-position = Vector2(143, 24)
+position = Vector2(456, 21)
 
 [node name="Moneda2" parent="Monedas" instance=ExtResource("3_2ka1k")]
-position = Vector2(315, -16)
-
-[node name="Moneda9" parent="Monedas" instance=ExtResource("3_2ka1k")]
-position = Vector2(647, 16)
+position = Vector2(644, 13)
 
 [node name="Moneda3" parent="Monedas" instance=ExtResource("3_2ka1k")]
-position = Vector2(868, -35)
-
-[node name="Moneda20" parent="Monedas" instance=ExtResource("3_2ka1k")]
-position = Vector2(868, -18)
-
-[node name="Moneda21" parent="Monedas" instance=ExtResource("3_2ka1k")]
-position = Vector2(868, -1)
-
-[node name="Moneda23" parent="Monedas" instance=ExtResource("3_2ka1k")]
-position = Vector2(868, 17)
-
-[node name="Moneda24" parent="Monedas" instance=ExtResource("3_2ka1k")]
-position = Vector2(868, 34)
+position = Vector2(679, 85)
 
 [node name="Moneda4" parent="Monedas" instance=ExtResource("3_2ka1k")]
-position = Vector2(438, 9)
+position = Vector2(705, 109)
 
 [node name="Moneda5" parent="Monedas" instance=ExtResource("3_2ka1k")]
-position = Vector2(438, 25)
+position = Vector2(1145, -33)
 
 [node name="Moneda6" parent="Monedas" instance=ExtResource("3_2ka1k")]
-position = Vector2(438, 41)
+position = Vector2(2057, -60)
 
 [node name="Moneda7" parent="Monedas" instance=ExtResource("3_2ka1k")]
-position = Vector2(438, 57)
-
-[node name="Moneda8" parent="Monedas" instance=ExtResource("3_2ka1k")]
-position = Vector2(438, -7)
-
-[node name="Moneda10" parent="Monedas" instance=ExtResource("3_2ka1k")]
-position = Vector2(1023, 47)
-
-[node name="Moneda15" parent="Monedas" instance=ExtResource("3_2ka1k")]
-position = Vector2(1150, -35)
-
-[node name="Moneda16" parent="Monedas" instance=ExtResource("3_2ka1k")]
-position = Vector2(1347, 33)
-
-[node name="Moneda18" parent="Monedas" instance=ExtResource("3_2ka1k")]
-position = Vector2(2054, -65)
-
-[node name="Moneda19" parent="Monedas" instance=ExtResource("3_2ka1k")]
-position = Vector2(1864, -33)
-
-[node name="Moneda17" parent="Monedas" instance=ExtResource("3_2ka1k")]
-position = Vector2(1259, 26)
+position = Vector2(2718, 89)
 
 [node name="Akritas" type="Node" parent="."]
 
 [node name="Akrita" parent="Akritas" instance=ExtResource("7_ebtnq")]
-position = Vector2(2304, -4)
+position = Vector2(2577, 38)
+
+[node name="Akrita2" parent="Akritas" instance=ExtResource("7_ebtnq")]
+position = Vector2(2025, -87)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("9_bpkdb")
+
+[node name="Burbujas" type="Node" parent="HUD"]
+
+[node name="b-1" parent="HUD/Burbujas" instance=ExtResource("9_mlgrx")]
+visible = false
+position = Vector2(84, 94)
+
+[node name="b-2" parent="HUD/Burbujas" instance=ExtResource("9_mlgrx")]
+visible = false
+position = Vector2(126, 94)
+
+[node name="b-3" parent="HUD/Burbujas" instance=ExtResource("9_mlgrx")]
+visible = false
+position = Vector2(168, 94)
+
+[node name="b-4" parent="HUD/Burbujas" instance=ExtResource("9_mlgrx")]
+visible = false
+position = Vector2(210, 94)
+
+[node name="b-5" parent="HUD/Burbujas" instance=ExtResource("9_mlgrx")]
+visible = false
+position = Vector2(252, 94)
+
+[node name="Corazones" type="Node" parent="HUD"]
+
+[node name="c-1" parent="HUD/Corazones" instance=ExtResource("11_ae6e5")]
+position = Vector2(86.00001, 51)
+
+[node name="c-2" parent="HUD/Corazones" instance=ExtResource("11_ae6e5")]
+position = Vector2(128, 51)
+
+[node name="c-3" parent="HUD/Corazones" instance=ExtResource("11_ae6e5")]
+position = Vector2(169.99998, 50.999996)
+
+[node name="c-4" parent="HUD/Corazones" instance=ExtResource("11_ae6e5")]
+position = Vector2(211.99997, 50.999992)
+
+[node name="c-5" parent="HUD/Corazones" instance=ExtResource("11_ae6e5")]
+position = Vector2(254, 51)
