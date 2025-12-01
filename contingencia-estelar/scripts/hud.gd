@@ -1,5 +1,11 @@
 extends CanvasLayer
 
+@onready var animation_player: AnimationPlayer = $"/root/Juego/AnimationPlayer"
+
+
+func fade_to_black():
+	animation_player.play("fade_out")
+
 @onready var burbujas: Array = [
 	$"Burbujas/b-1",
 	$"Burbujas/b-2",
