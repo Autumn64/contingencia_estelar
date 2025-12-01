@@ -10,16 +10,39 @@ extends CharacterBody2D
 @onready var attack_audio: AudioStreamPlayer2D = $AttackAudio
 @onready var damage_audio: AudioStreamPlayer2D = $DamageAudio
 
+@onready var biiblets: Node = $"/root/Juego/Biiblets"
+@onready var akritas: Node = $"/root/Juego/Akritas"
+
 var t_espera: float = 0.0
 var calculo_inicial: bool = false
 
 const SPEED = 100.0
 const JUMP_VELOCITY = -130.0
 var life = 100
-var oxygen = 40
+var oxygen = 60
 var acc = 0
 var sliding = false
 var attacking = false
+var can_move = true
+
+func reload_level():
+	get_tree().reload_current_scene()
+
+func clear_enemies():
+	for element in biiblets.get_children():
+		element.queue_free()
+		
+	for element in akritas.get_children():
+		element.queue_free()
+
+func player_die() -> void:
+	sprite.play("idle")
+	clear_enemies()
+	set_process_input(false)
+	can_move = false
+	velocity = Vector2.ZERO
+	hud.fade_to_black()
+	animation_player_2.play("dying")
 
 func calcular_vida() -> void:
 	if life <= 0:
@@ -65,9 +88,10 @@ func life_events():
 	calcular_burbujas()
 	calcular_vida()
 	if life <= 0:
-		get_tree().reload_current_scene()
+		player_die()
 
 func attack_event():
+	if not can_move: return
 	attacking = true
 	if is_on_floor():
 		sprite.play("attacking_running" if velocity.x != 0 else "attacking_idle")
@@ -78,6 +102,7 @@ func apply_knockback(force: Vector2) -> void:
 	velocity = force
 
 func onair_physics(delta: float) -> void:
+	if not can_move: return
 	acc = 1.3
 	velocity += get_gravity() * delta
 	
@@ -94,6 +119,7 @@ func onair_physics(delta: float) -> void:
 		sliding = true
 
 func onfloor_physics() -> void:
+	if not can_move: return
 	acc = 2.0
 	sliding = false
 	
@@ -113,6 +139,7 @@ func onfloor_physics() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if not can_move: return
 	# Add the gravity.
 	if not is_on_floor():
 		onair_physics(delta)
@@ -168,3 +195,5 @@ func _process(delta) -> void:
 func _on_animation_player_2_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "damaged":
 		animation_player_2.play("RESET")
+	#if anim_name == "dying":
+		#get_tree().reload_current_scene()
