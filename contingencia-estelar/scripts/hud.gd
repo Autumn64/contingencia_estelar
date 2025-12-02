@@ -2,8 +2,8 @@ extends CanvasLayer
 
 @onready var animation_player: AnimationPlayer = $"/root/Juego/AnimationPlayer"
 
-
 func fade_to_black():
+	if animation_player.is_playing(): return
 	animation_player.play("fade_out")
 
 @onready var burbujas: Array = [
@@ -47,7 +47,3 @@ func dibujar_burbujas(cant: int) -> void:
 	while i < 5:
 		burbujas[i].visible = false
 		i += 1
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.

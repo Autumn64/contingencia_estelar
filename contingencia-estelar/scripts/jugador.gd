@@ -9,6 +9,7 @@ extends CharacterBody2D
 @onready var slide_audio: AudioStreamPlayer2D = $SlideAudio
 @onready var attack_audio: AudioStreamPlayer2D = $AttackAudio
 @onready var damage_audio: AudioStreamPlayer2D = $DamageAudio
+@onready var life_timer: Timer = $LifeTimer
 
 @onready var biiblets: Node = $"/root/Juego/Biiblets"
 @onready var akritas: Node = $"/root/Juego/Akritas"
@@ -36,6 +37,7 @@ func clear_enemies():
 		element.queue_free()
 
 func player_die() -> void:
+	life_timer.stop()
 	sprite.play("idle")
 	clear_enemies()
 	set_process_input(false)
@@ -117,6 +119,8 @@ func onair_physics(delta: float) -> void:
 		slide_audio.play()
 		velocity.y = -130
 		sliding = true
+		if oxygen > 0: oxygen -= 4
+		life_events()
 
 func onfloor_physics() -> void:
 	if not can_move: return
