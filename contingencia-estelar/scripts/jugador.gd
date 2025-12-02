@@ -195,9 +195,14 @@ func _process(delta) -> void:
 	if t_espera >= 0.1 and not calculo_inicial:
 		calculo_inicial = true
 		life_events()
+		hud.show_label()
 
 func _on_animation_player_2_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "damaged":
 		animation_player_2.play("RESET")
 	#if anim_name == "dying":
 		#get_tree().reload_current_scene()
+
+func _on_ready() -> void:
+	var level = Globals.levels[Globals.current_level]
+	set_global_position(level["position"])
