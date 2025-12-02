@@ -7,7 +7,8 @@ var run_speed = 40
 var player = null
 var knockback = false
 var life = 100
-var damage_factor = 40
+const damage_factor = 40
+const player_damage = 10
 
 # Si no detecta al jugador se moverá aleatoriamente
 var wander_target: Vector2

@@ -2913,33 +2913,6 @@ pattern_6 = SubResource("TileMapPattern_d7syh")
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_iq6uk"]
 distance = -10.0
 
-[sub_resource type="Animation" id="Animation_ae6e5"]
-resource_name = "fade_out"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("FadeOverlay:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Jugador/AudioStreamPlayer2D:volume_db")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, -80.0]
-}
-
 [sub_resource type="Animation" id="Animation_y8n3i"]
 length = 0.001
 tracks/0/type = "value"
@@ -2965,6 +2938,33 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_ae6e5"]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FadeOverlay:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Jugador/AudioStreamPlayer2D:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -80.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pncoq"]
@@ -3067,10 +3067,10 @@ position = Vector2(2718, 89)
 [node name="Akritas" type="Node" parent="."]
 
 [node name="Akrita" parent="Akritas" instance=ExtResource("7_ebtnq")]
-position = Vector2(2577, 38)
+position = Vector2(2467, 37)
 
 [node name="Akrita2" parent="Akritas" instance=ExtResource("7_ebtnq")]
-position = Vector2(2025, -87)
+position = Vector2(2804, 57)
 
 [node name="HUD" type="CanvasLayer" parent="."]
 script = ExtResource("9_bpkdb")

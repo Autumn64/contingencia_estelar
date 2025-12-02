@@ -5,5 +5,7 @@ extends Area2D
 
 func _on_body_entered(_body: Node2D) -> void:
 	animation_player.play("pickup")
+	jugador.life_timer.stop()
+	jugador.life_timer.start()
 	jugador.oxygen += 8
 	jugador.life_events()

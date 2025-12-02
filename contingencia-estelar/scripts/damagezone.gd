@@ -10,7 +10,7 @@ func start_timer() -> void:
 		timer.start()
 
 func _on_area_entered(_area: Area2D) -> void:
-	jugador.life -= 5
+	jugador.life -= parent.player_damage
 	jugador.damage_audio.play()
 	var direction := jugador.global_position - global_position
 	if direction.length() < 16.0:
