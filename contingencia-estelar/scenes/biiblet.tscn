@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://8ncwhrblhetn" path="res://assets/sprites/Biiblet.png" id="1_3arj4"]
 [ext_resource type="Script" uid="uid://mbd2vrrs38at" path="res://scripts/biiblet.gd" id="1_n0vlh"]
 [ext_resource type="PackedScene" uid="uid://bkxxihh8m004o" path="res://scenes/damagezone.tscn" id="2_bg7op"]
-[ext_resource type="AudioStream" uid="uid://b7msn0agj5o0n" path="res://assets/sfx/attack_enemy.ogg" id="4_gwmvq"]
+[ext_resource type="AudioStream" uid="uid://cvxjm087j7d4h" path="res://assets/sfx/attack_enemy.ogg" id="4_gwmvq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gwmvq"]
 radius = 4.0

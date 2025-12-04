@@ -7,8 +7,10 @@ var run_speed = 70
 var player = null
 var knockback = false
 var life = 100
-const damage_factor = 50
+const damage_factor = 35
 const player_damage = 5
+
+var is_dying := false
 
 # Si no detecta al jugador se moverá aleatoriamente
 var wander_target: Vector2
@@ -16,11 +18,28 @@ var wander_range_x := 50
 var wander_range_y := 20
 var wander_speed := 15 
 
-func life_events():
-	if life <= 0: 
+func die_effect():
+	velocity = Vector2.ZERO
+	run_speed = 0
+
+	var tween := create_tween()
+
+	for i in range(3):
+		tween.tween_property(sprite, "modulate", Color(1, 0.2, 0.2), 0.08)
+		tween.tween_property(sprite, "modulate", Color(1, 1, 1), 0.08)
+
+	tween.tween_property(sprite, "modulate", Color(1, 0, 0), 0.15)
+
+	tween.tween_callback(func():
 		attacked_animation.play("attacked_die")
-		return
-	attacked_animation.play("attacked")
+	)
+
+func life_events():
+	if life <= 0 and not is_dying:
+		is_dying = true
+		die_effect()
+	else:
+		attacked_animation.play("attacked")
 
 func wander():
 	if position.distance_to(wander_target) < 5:

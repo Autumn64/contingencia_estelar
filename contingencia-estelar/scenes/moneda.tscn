@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://do46igvx0a2ue"]
 
 [ext_resource type="Script" uid="uid://cex4oiut6oiv8" path="res://scripts/moneda.gd" id="1_r2l3b"]
-[ext_resource type="Texture2D" uid="uid://3tud4obobk00" path="res://assets/sprites/Bubble.png" id="2_lqt2j"]
+[ext_resource type="Texture2D" uid="uid://cmoi0vxj88ht1" path="res://assets/sprites/Bubble.png" id="2_lqt2j"]
 [ext_resource type="AudioStream" uid="uid://tu1li6ws4lxt" path="res://assets/sfx/coin.ogg" id="3_lqt2j"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lqt2j"]
@@ -132,7 +132,7 @@ collision_mask = 32
 script = ExtResource("1_r2l3b")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.8, 0.8)
 sprite_frames = SubResource("SpriteFrames_k2ql3")
 autoplay = "default"
 
