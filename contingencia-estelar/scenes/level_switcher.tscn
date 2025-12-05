@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://cww727efed2on"]
+
+[ext_resource type="Script" uid="uid://c4chbungqx7f4" path="res://scripts/level_switcher.gd" id="1_oscnk"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_bpw0g"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_oscnk"]
+a = Vector2(0, -378)
+b = Vector2(0, 201)
+
+[node name="Level Switcher" type="StaticBody2D"]
+collision_mask = 32
+script = ExtResource("1_oscnk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5707964
+shape = SubResource("WorldBoundaryShape2D_bpw0g")
+one_way_collision = true
+
+[node name="Detector" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Detector"]
+position = Vector2(0, -1)
+shape = SubResource("SegmentShape2D_oscnk")
+
+[connection signal="area_entered" from="Detector" to="." method="_on_detector_area_entered"]
