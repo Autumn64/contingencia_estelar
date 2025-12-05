@@ -25,6 +25,7 @@ var acc = 0
 var sliding = false
 var attacking = false
 var can_move = true
+var is_ending = false
 
 func reload_level():
 	get_tree().reload_current_scene()
@@ -92,8 +93,24 @@ func life_events():
 	if life <= 0:
 		player_die()
 
+func player_automove() -> void:
+	is_ending = true
+	
+func player_autostop() -> void:
+	sprite.play("idle")
+	is_ending = false
+	can_move = false #para que el personaje no se pueda mover
+
+func end_game() -> void:
+	hud.end_game()
+
+func end_animation() -> void:
+	if animation_player_2.is_playing():
+		animation_player_2.stop()
+	animation_player_2.play("end_cutscene")
+
 func attack_event():
-	if not can_move: return
+	if not can_move or is_ending: return
 	attacking = true
 	if is_on_floor():
 		sprite.play("attacking_running" if velocity.x != 0 else "attacking_idle")
@@ -113,7 +130,7 @@ func onair_physics(delta: float) -> void:
 	if sprite.animation != "jumping":
 		sprite.play("jumping")
 	
-	if (Input.is_action_just_pressed("slide") and velocity.x != 0) and not sliding:
+	if (Input.is_action_just_pressed("slide") and velocity.x != 0) and not sliding and not is_ending:
 		sprite.stop()
 		sprite.play("jumping")
 		slide_audio.play()
@@ -131,12 +148,13 @@ func onfloor_physics() -> void:
 	
 	# Animation
 	if velocity.x != 0:
-		sprite.play("running")
+		var vel = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
+		sprite.play("running", vel)
 	else:
 		sprite.play("idle")
 	
 	# Handle jump.
-	if Input.is_action_just_pressed("jump"):
+	if Input.is_action_just_pressed("jump") and not is_ending:
 		sprite.play("jumping")
 		jump_audio.play()
 		velocity.y = JUMP_VELOCITY
@@ -150,13 +168,23 @@ func _physics_process(delta: float) -> void:
 	else: 
 		onfloor_physics()
 		
-	if Input.is_action_just_pressed("attack") and not attacking:
+	if Input.is_action_just_pressed("attack") and not attacking and not is_ending:
 		animation_player.play("attack")
 		attack_audio.play()
 		attack_event()
 		
 	# Get the input direction and handle the movement/deceleration.
-	var direction := Input.get_axis("move_left", "move_right")
+	var direction := 0
+	if Input.is_action_pressed("move_left") and not is_ending:
+		direction -= 1
+	if Input.is_action_pressed("move_right") and not is_ending:
+		direction += 1
+	if is_ending:
+		direction += 1
+	if is_ending and is_on_floor():
+		sprite.play("running")
+	if is_ending and not is_on_floor():
+		sprite.play("jumping")
 	if direction:
 		sprite.flip_h = (direction < 0)
 		attack_shape.scale.x = -1 if (direction < 0) else 1

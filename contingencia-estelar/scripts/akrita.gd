@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attacked_animation: AnimationPlayer = $AttackedAnimation
+@onready var damage_zone: CollisionShape2D = $DamageZone/CollisionShape2D
+@onready var dying_timer: Timer = $DyingTimer
 
 var run_speed = 40
 var player = null
@@ -10,7 +12,7 @@ var life = 100
 const damage_factor = 40
 const player_damage = 10
 
-var is_dying := false
+var is_dying = false
 
 # Si no detecta al jugador se moverá aleatoriamente
 var wander_target: Vector2
@@ -18,31 +20,10 @@ var wander_range_x := 50
 var wander_range_y := 10
 var wander_speed := 10 
 
-func die_effect():
-	velocity = Vector2.ZERO
-	run_speed = 0
-
-	var tween := create_tween()
-
-	for i in range(3):
-		tween.tween_property(sprite, "modulate", Color(1, 0.2, 0.2), 0.08)
-		tween.tween_property(sprite, "modulate", Color(1, 1, 1), 0.08)
-
-	tween.tween_property(sprite, "modulate", Color(1, 0, 0), 0.15)
-
-	var back_dir = -Vector2(cos(sprite.rotation), sin(sprite.rotation)) * 40
-	tween.tween_property(self, "position", position + back_dir, 0.2)\
-		.set_trans(Tween.TRANS_SINE)\
-		.set_ease(Tween.EASE_OUT)
-
-	tween.tween_callback(func():
-		attacked_animation.play("attacked_die")
-	)
-
 func life_events():
 	if life <= 0 and not is_dying:
-		is_dying = true
-		die_effect()
+		dying_timer.start()
+		attacked_animation.play("attacked_die")
 	else:
 		attacked_animation.play("attacked")
 
@@ -66,6 +47,9 @@ func apply_knockback(force: Vector2) -> void:
 	velocity = force
 
 func _physics_process(_delta):
+	if is_dying:
+		velocity = Vector2(0, 0)
+		return
 	if not player:
 		if get_slide_collision_count() > 0: set_wander_target()
 		wander()
@@ -97,3 +81,6 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 	if sprite.animation == "attack_finish":
 		sprite.play("idle")
 		run_speed = 40
+
+func _on_dying_timer_timeout() -> void:
+	is_dying = true

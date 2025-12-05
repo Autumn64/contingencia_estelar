@@ -1,0 +1,78 @@
+[gd_scene load_steps=8 format=3 uid="uid://lnruj5iw6pps"]
+
+[ext_resource type="FontFile" uid="uid://bmtldj4o0mt3o" path="res://assets/fonts/Pixel_NES.otf" id="1_fgkus"]
+[ext_resource type="Script" uid="uid://dkcudh2g8whd0" path="res://scripts/title_screen.gd" id="1_sa3yf"]
+[ext_resource type="Texture2D" uid="uid://bx3wc5ovbl0bj" path="res://assets/sprites/icon.png" id="2_s4lrb"]
+
+[sub_resource type="Gradient" id="Gradient_1a2ex"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fgkus"]
+gradient = SubResource("Gradient_1a2ex")
+
+[sub_resource type="LabelSettings" id="LabelSettings_sa3yf"]
+font = ExtResource("1_fgkus")
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_s4lrb"]
+font = ExtResource("1_fgkus")
+font_size = 30
+
+[node name="TitleScreen" type="CanvasLayer"]
+script = ExtResource("1_sa3yf")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 1163.0
+offset_bottom = 657.0
+texture = SubResource("GradientTexture2D_fgkus")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(573.00006, 210)
+scale = Vector2(5, 5)
+texture = ExtResource("2_s4lrb")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 69.5
+offset_bottom = 105.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Start" type="Label" parent="CenterContainer"]
+layout_mode = 2
+text = "Iniciar"
+label_settings = SubResource("LabelSettings_sa3yf")
+
+[node name="CenterContainer2" type="CenterContainer" parent="."]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 126.0
+offset_bottom = 162.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="About" type="Label" parent="CenterContainer2"]
+layout_mode = 2
+text = "Acerca de"
+label_settings = SubResource("LabelSettings_sa3yf")
+
+[node name="Opt1" type="Label" parent="."]
+offset_left = 414.0
+offset_top = 392.0
+offset_right = 454.0
+offset_bottom = 428.0
+text = ">"
+label_settings = SubResource("LabelSettings_s4lrb")
+
+[node name="Opt2" type="Label" parent="."]
+offset_left = 414.0
+offset_top = 450.0
+offset_right = 454.0
+offset_bottom = 486.0
+text = ">"
+label_settings = SubResource("LabelSettings_s4lrb")
