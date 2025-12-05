@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bfs3v107fbxuk"]
+[gd_scene load_steps=31 format=3 uid="uid://bfs3v107fbxuk"]
 
 [ext_resource type="Texture2D" uid="uid://8ncwhrblhetn" path="res://assets/sprites/Biiblet.png" id="1_3arj4"]
 [ext_resource type="Script" uid="uid://mbd2vrrs38at" path="res://scripts/biiblet.gd" id="1_n0vlh"]
@@ -49,17 +49,33 @@ region = Rect2(768, 0, 64, 62)
 atlas = ExtResource("1_3arj4")
 region = Rect2(832, 0, 64, 62)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bg7op"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_wiqlx"]
 atlas = ExtResource("1_3arj4")
 region = Rect2(0, 0, 64, 62)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wiqlx"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_2npvp"]
+atlas = ExtResource("1_3arj4")
+region = Rect2(64, 0, 64, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1a2ei"]
 atlas = ExtResource("1_3arj4")
 region = Rect2(128, 0, 64, 62)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_2npvp"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_pn1oa"]
 atlas = ExtResource("1_3arj4")
 region = Rect2(192, 0, 64, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ftwop"]
+atlas = ExtResource("1_3arj4")
+region = Rect2(256, 0, 64, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n5s2r"]
+atlas = ExtResource("1_3arj4")
+region = Rect2(320, 0, 64, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t1gde"]
+atlas = ExtResource("1_3arj4")
+region = Rect2(384, 0, 64, 62)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xc5at"]
 animations = [{
@@ -100,17 +116,29 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_bg7op")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_wiqlx")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2npvp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1a2ei")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pn1oa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ftwop")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n5s2r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t1gde")
 }],
 "loop": true,
 "name": &"idle",
-"speed": 3.0
+"speed": 8.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bg7op"]
@@ -189,6 +217,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_6fo31"]
@@ -273,7 +313,7 @@ shape = SubResource("CapsuleShape2D_gwmvq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_xc5at")
-animation = &"attacking"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="ChaseRadius" type="Area2D" parent="."]

@@ -19,7 +19,7 @@ func fade_to_black():
 	animation_player.play("fade_out")
 
 func set_punctuation():
-	var template = "Tardaste %.2f seg. en el capítulo %s: %s puntos."
+	var template = "Tardaste %.2f seg .  en el capítulo %s: %s puntos."
 	primer_nivel.text =  template % [Globals.levels[1]["completion_time"], 1, Globals.levels[1]["points"]]
 	segundo_nivel.text =  template % [Globals.levels[2]["completion_time"], 2, Globals.levels[2]["points"]]
 	tercer_nivel.text =  template % [Globals.levels[3]["completion_time"], 3, Globals.levels[3]["points"]]
@@ -43,7 +43,7 @@ func end_game():
 		if time_factor < 0: time_factor = 0
 		Globals.levels[i]["points"] = int(time_factor * Globals.points_factor)
 		
-	titulo.text = "Ya estás a salvo, por ahora..."
+	titulo.text = "Ya estás a salvo ,  por ahora . . ."
 	set_punctuation()
 
 func level_change():
