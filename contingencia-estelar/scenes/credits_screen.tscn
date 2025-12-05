@@ -1,0 +1,107 @@
+[gd_scene load_steps=7 format=3 uid="uid://c042ukgdpk4j2"]
+
+[ext_resource type="Script" uid="uid://dvhocqwiv15n1" path="res://scripts/credits_screen.gd" id="1_wiy8m"]
+[ext_resource type="FontFile" uid="uid://bmtldj4o0mt3o" path="res://assets/fonts/Pixel_NES.otf" id="3_wdjou"]
+
+[sub_resource type="Gradient" id="Gradient_1a2ex"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fgkus"]
+gradient = SubResource("Gradient_1a2ex")
+
+[sub_resource type="LabelSettings" id="LabelSettings_m2eu1"]
+font = ExtResource("3_wdjou")
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_sa3yf"]
+font = ExtResource("3_wdjou")
+font_size = 20
+
+[node name="CreditsScreen" type="CanvasLayer"]
+script = ExtResource("1_wiy8m")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 1163.0
+offset_bottom = 657.0
+texture = SubResource("GradientTexture2D_fgkus")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 100.0
+offset_bottom = 136.0
+grow_horizontal = 2
+
+[node name="Titulo" type="Label" parent="CenterContainer"]
+layout_mode = 2
+text = "Contingencia Estelar"
+label_settings = SubResource("LabelSettings_m2eu1")
+
+[node name="CenterContainer2" type="CenterContainer" parent="."]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -124.0
+offset_bottom = -19.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Fila1" type="Label" parent="CenterContainer2"]
+layout_mode = 2
+text = "Arturo Cervantes:
+Escenarios, partículas,
+efectos visuales y
+sprite de jugador"
+label_settings = SubResource("LabelSettings_sa3yf")
+horizontal_alignment = 1
+
+[node name="CenterContainer3" type="CenterContainer" parent="."]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -8.0
+offset_bottom = 97.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Fila1" type="Label" parent="CenterContainer3"]
+layout_mode = 2
+text = "Lilia Dávila:
+Sprites y animaciones de enemigos"
+label_settings = SubResource("LabelSettings_sa3yf")
+horizontal_alignment = 1
+
+[node name="CenterContainer4" type="CenterContainer" parent="."]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 90.0
+offset_bottom = 195.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Fila1" type="Label" parent="CenterContainer4"]
+layout_mode = 2
+text = "Mónica Gómez:
+Programación, Música y SFX"
+label_settings = SubResource("LabelSettings_sa3yf")
+horizontal_alignment = 1
+
+[node name="CenterContainer5" type="CenterContainer" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -98.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Fila1" type="Label" parent="CenterContainer5"]
+layout_mode = 2
+text = "¡Presiona Start!"
+label_settings = SubResource("LabelSettings_sa3yf")
+horizontal_alignment = 1
