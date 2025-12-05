@@ -524,7 +524,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_pdyqb"]
 resource_name = "end_cutscene"
-length = 5.0
+length = 7.5
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -532,7 +532,7 @@ tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 5),
+"times": PackedFloat32Array(0, 7.5),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
@@ -549,7 +549,7 @@ tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(4.8),
+"times": PackedFloat32Array(7),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],

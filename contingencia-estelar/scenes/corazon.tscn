@@ -1,20 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://b7ghl6cykfyfs"]
+[gd_scene load_steps=6 format=3 uid="uid://b7ghl6cykfyfs"]
 
-[ext_resource type="Texture2D" uid="uid://bur52yicrhku0" path="res://assets/sprites/hearts.png" id="1_nrsr5"]
+[ext_resource type="Texture2D" uid="uid://c50b6a2jctmv" path="res://assets/sprites/hearts/heartfull.png" id="1_5vldm"]
+[ext_resource type="Texture2D" uid="uid://d3b8alygb5t8t" path="res://assets/sprites/hearts/heartempty.png" id="2_i505x"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_nrsr5"]
-atlas = ExtResource("1_nrsr5")
-region = Rect2(0, 0, 8, 8)
+[sub_resource type="AtlasTexture" id="AtlasTexture_rmlcu"]
+atlas = ExtResource("1_5vldm")
+region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5vldm"]
-atlas = ExtResource("1_nrsr5")
-region = Rect2(8, 0, 8, 8)
+[sub_resource type="AtlasTexture" id="AtlasTexture_gpmbu"]
+atlas = ExtResource("2_i505x")
+region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_vvx6w"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_nrsr5")
+"texture": SubResource("AtlasTexture_rmlcu")
 }],
 "loop": true,
 "name": &"default",
@@ -22,7 +23,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5vldm")
+"texture": SubResource("AtlasTexture_gpmbu")
 }],
 "loop": true,
 "name": &"disabled",
@@ -30,6 +31,6 @@ animations = [{
 }]
 
 [node name="Corazón" type="AnimatedSprite2D"]
-scale = Vector2(5, 5)
+scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_vvx6w")
 autoplay = "default"
