@@ -13,7 +13,9 @@ config_version=5
 config/name="Contingencia estelar"
 run/main_scene="uid://lnruj5iw6pps"
 config/features=PackedStringArray("4.5", "GL Compatibility")
-config/icon="res://icon.svg"
+boot_splash/bg_color=Color(0.004324121, 0.0043241223, 0.0043241195, 1)
+boot_splash/image="uid://bsmkrgjsjgmvc"
+config/icon="uid://bx3wc5ovbl0bj"
 
 [autoload]
 
