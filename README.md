@@ -2,6 +2,8 @@
 
 ![Portada Contingencia Estelar](cover.png)
 
+#### Juega a Contingencia Estelar [aquí](https://www.autumn64.xyz/contingencia.html).
+
 ## Descripción del juego
 "Contingencia Estelar" es un videojuego estilo 16-bits lleno de tensión y misterio. 
 
@@ -63,5 +65,6 @@ Nivel de peligro: Extremo
 ## Niveles
 Se desarrrollaron 3 níveles haciendo uso de un tilemap con elementos necesarios para construir relieves, plataformas, abismos y elementos del entorno como estrellas y asteroides. Los níveles están situados en un sólo nodo, conforme el jugador avanza la paleta de colores cambia.
 
-## Licencia
-Este proyecto está bajo la licencia AGPL v3 o superior. Sprites y escenarios bajo licencia CC BY-SA, música y efectos de sonido bajo licencia CC BY.
+#### Todo el código en este repositorio está bajo la [Licencia Pública General Affero de GNU v3 o superior](./LICENSE), con algunas librerías y módulos pudiendo poseer distintas licencias permisivas compatibles con la licencia principal del proyecto. Los tiles, sprites y escenarios están bajo licencia CC BY-NC-SA, mientras que la música está bajo licencia CC BY. Este programa está destinado a su distribución para propósitos no comerciales, y ni la propietaria del proyecto ni sus colaboradores son responsables del uso que cualquiera fuera de éste pueda dar al software proporcionado y a sus insumos.
+
+#### All the code in this repository is licensed under the [GNU Affero General Public License version 3 or later](./LICENSE), with some libraries and modules that may be under different permissive licenses compatible with the main project's license. The tiles, sprites and scenarios are licensed by the CC BY-NC-SA, while the music is under the CC BY license. This program is meant to be distributed for non-commercial purposes, and neither this project's owner nor its contributors are responsible for the use anyone outside of it may give to the software provided and its assets.
