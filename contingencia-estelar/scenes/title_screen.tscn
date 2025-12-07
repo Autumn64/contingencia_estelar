@@ -58,7 +58,7 @@ grow_vertical = 2
 
 [node name="About" type="Label" parent="CenterContainer2"]
 layout_mode = 2
-text = "Acerca de"
+text = "Créditos"
 label_settings = SubResource("LabelSettings_sa3yf")
 
 [node name="Opt1" type="Label" parent="."]
