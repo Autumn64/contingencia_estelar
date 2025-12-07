@@ -2,11 +2,11 @@
 
 [ext_resource type="Texture2D" uid="uid://dvigxv6yibh1k" path="res://assets/sprites/Tilemap.png" id="1_5g1u2"]
 [ext_resource type="PackedScene" uid="uid://484gxmjuxn15" path="res://scenes/jugador.tscn" id="1_x4n2o"]
-[ext_resource type="Texture2D" uid="uid://plvbs6sdcnf3" path="res://assets/sprites/tileset.png" id="2_uc3sl"]
+[ext_resource type="Texture2D" uid="uid://dgey8jqbtosds" path="res://assets/sprites/tileset.png" id="2_uc3sl"]
 [ext_resource type="PackedScene" uid="uid://do46igvx0a2ue" path="res://scenes/moneda.tscn" id="3_2ka1k"]
 [ext_resource type="PackedScene" uid="uid://b4mdwsmxpneju" path="res://scenes/killzone.tscn" id="4_pew7j"]
 [ext_resource type="PackedScene" uid="uid://bfs3v107fbxuk" path="res://scenes/biiblet.tscn" id="5_ervc2"]
-[ext_resource type="AudioStream" uid="uid://q0k73ntiw1sa" path="res://assets/bgm/into the void_square.ogg" id="5_iq6uk"]
+[ext_resource type="AudioStream" uid="uid://cuo8a78e17doo" path="res://assets/bgm/into the void_square.ogg" id="5_iq6uk"]
 [ext_resource type="Script" uid="uid://xa2dy4lbblc1" path="res://scripts/hud.gd" id="9_bpkdb"]
 [ext_resource type="PackedScene" uid="uid://dek7j3nr5du58" path="res://scenes/ohnohn.tscn" id="9_c173r"]
 [ext_resource type="PackedScene" uid="uid://bwrkgqfe8bif4" path="res://scenes/burbuja.tscn" id="9_mlgrx"]
